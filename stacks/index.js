@@ -1,6 +1,7 @@
 import { AuthStack } from "./AuthStack";
 import { StorageStack } from "./StorageStack";
 import { ApiStack } from "./ApiStack";
+import { FrontendStack } from "./FrontendStack";
 
 export default function main(app) {
   app.setDefaultFunctionProps({
@@ -14,5 +15,6 @@ export default function main(app) {
   
   .stack(StorageStack)
   .stack(ApiStack)
-  .stack(AuthStack);
+  .stack(AuthStack)
+  .stack(FrontendStack);
 }
