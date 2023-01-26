@@ -1,11 +1,11 @@
-import Stripe from "stripe";
-import handler from "../util/handler";
-import { calculateCost } from "../util/cost";
+import handler from '../util/handler';
+import Stripe from 'stripe';
+import { calculateCost } from '../util/cost';
 
 export const main = handler(async (event) => {
   const { storage, source } = JSON.parse(event.body);
   const amount = calculateCost(storage);
-  const description = "Scratch charge";
+  const description = 'Scratch charge';
 
   // Load our secret key from the  environment variables
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -14,7 +14,7 @@ export const main = handler(async (event) => {
     source,
     amount,
     description,
-    currency: "aud",
+    currency: 'aud',
   });
 
   return { status: true };
