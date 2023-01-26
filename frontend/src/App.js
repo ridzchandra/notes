@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import "./App.css";
-import Routes from "./Routes";
-import { LinkContainer } from "react-router-bootstrap";
-import { AppContext } from "./lib/contextLib";
-import { Auth } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
-import { onError } from "./lib/errorLib";
+import React, { useState, useEffect } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import './App.css';
+import Routes from './Routes';
+import { LinkContainer } from 'react-router-bootstrap';
+import { AppContext } from './lib/contextLib';
+import { Auth } from 'aws-amplify';
+import { useNavigate } from 'react-router-dom';
+import { onError } from './lib/errorLib';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -22,7 +23,7 @@ function App() {
       await Auth.currentSession();
       userHasAuthenticated(true);
     } catch (e) {
-      if (e !== "No current user") {
+      if (e !== 'No current user') {
         onError(e);
       }
     }
@@ -34,7 +35,7 @@ function App() {
     await Auth.signOut();
 
     userHasAuthenticated(false);
-    nav("/login");
+    nav('/login');
   }
 
   return (
@@ -69,9 +70,13 @@ function App() {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <Routes />
-        </AppContext.Provider>
+        <ErrorBoundary>
+          <AppContext.Provider
+            value={{ isAuthenticated, userHasAuthenticated }}
+          >
+            <Routes />
+          </AppContext.Provider>
+        </ErrorBoundary>
       </div>
     )
   );

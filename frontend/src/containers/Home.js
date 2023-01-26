@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-import { useAppContext } from "../lib/contextLib";
-import { onError } from "../lib/errorLib";
-import { API } from "aws-amplify";
-import { BsPencilSquare } from "react-icons/bs";
-import { LinkContainer } from "react-router-bootstrap";
-import "./Home.css";
+import React, { useState, useEffect } from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { useAppContext } from '../lib/contextLib';
+import { onError } from '../lib/errorLib';
+import { API } from 'aws-amplify';
+import { BsPencilSquare } from 'react-icons/bs';
+import { LinkContainer } from 'react-router-bootstrap';
+import './Home.css';
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
@@ -32,7 +32,7 @@ export default function Home() {
   }, [isAuthenticated]);
 
   function loadNotes() {
-    return API.get("notes", "/notes");
+    return API.get('notes', '/notes');
   }
 
   function renderNotesList(notes) {
@@ -48,7 +48,7 @@ export default function Home() {
           <LinkContainer key={noteId} to={`/notes/${noteId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
-                {content.trim().split("\n")[0]}
+                {content.trim().split('\n')[0]}
               </span>
               <br />
               <span className="text-muted">
