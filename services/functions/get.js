@@ -18,10 +18,6 @@ export const main = handler(async (event) => {
     throw new Error('Item not found.');
   }
 
-  console.log('SETTING TIMEOUT');
-  // Set a timeout
-  await new Promise((resolve) => setTimeout(resolve, 10000));
-
   // Return the retrieved item
   return result.Item;
 });
