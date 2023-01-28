@@ -3,7 +3,8 @@ import AWS from 'aws-sdk';
 
 let logs;
 
-// Log AWS SDK calls
+// Log AWS SDK calls like calling MongoDb for example.
+// We're telling AWS SDK to use our debug method as the logger.
 AWS.config.logger = { log: debug };
 
 export default function debug() {
